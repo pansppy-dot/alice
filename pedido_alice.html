@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffe4ef" />
+  <title>um pedido muito sério, alice 💗</title>
+  <style>
+    :root {
+      --pink: #ff6fae;
+      --hot-pink: #ec4899;
+      --soft-pink: #ffe4ef;
+      --cream: #fffafc;
+      --ink: #513447;
+      --muted: #8b6578;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: ui-rounded, "Trebuchet MS", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(145deg, #fff4f8 0%, #ffe0ed 48%, #ffd0e4 100%);
+      overflow-x: hidden;
+    }
+    button { font: inherit; }
+    .floating-heart {
+      position: fixed; z-index: 0; pointer-events: none; opacity: .24;
+      animation: floatUp linear infinite; user-select: none;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(110vh) rotate(0deg); }
+      to { transform: translateY(-15vh) rotate(35deg); }
+    }
+    .page { position: relative; z-index: 1; width: min(100% - 28px, 680px); margin: 0 auto; padding: 32px 0 44px; }
+    .top-label {
+      display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px;
+      border: 1px solid #ffc2dc; border-radius: 999px; background: #ffffffa8;
+      color: #b83274; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    }
+    .card {
+      margin-top: 15px; padding: clamp(22px, 6vw, 42px); border: 1px solid #ffffffd9;
+      border-radius: 28px; background: #fffafce8; box-shadow: 0 20px 60px #bd4e7a24;
+      backdrop-filter: blur(8px); text-align: center;
+    }
+    .pixel-heart { display: inline-block; font-size: clamp(46px, 12vw, 68px); filter: drop-shadow(0 7px 0 #f7b2d0); animation: heartbeat 1.6s ease-in-out infinite; }
+    @keyframes heartbeat { 0%,100%{transform:scale(1)} 10%,25%{transform:scale(1.08)} 18%,33%{transform:scale(1)} }
+    h1 { margin: 14px 0 10px; font-size: clamp(2rem, 8vw, 3.35rem); line-height: 1.04; letter-spacing: -.045em; }
+    h1 span { color: var(--hot-pink); }
+    .subtitle { max-width: 490px; margin: 0 auto; color: var(--muted); font-size: 1.03rem; line-height: 1.65; }
+    .divider { width: 76px; height: 4px; margin: 24px auto; border-radius: 9px; background: linear-gradient(90deg, #ffb0d0, #ec4899); }
+    .notice { margin: 0 auto 22px; padding: 13px 15px; max-width: 470px; border: 1px dashed #f2a1c4; border-radius: 16px; background: #fff0f6; color: #85516b; font-size: .91rem; line-height: 1.5; }
+    .notice strong { color: #ba3476; }
+    .mini-section { margin-top: 15px; padding: 20px; border-radius: 22px; background: #ffffffb8; text-align: left; }
+    .mini-section h2 { margin: 0 0 9px; font-size: 1.05rem; }
+    .mini-section p { margin: 0; color: #79566a; line-height: 1.65; font-size: .95rem; }
+    .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 18px; }
+    .badge { padding: 8px 11px; border-radius: 999px; background: #ffe6f1; color: #a33c70; font-size: .82rem; font-weight: 750; }
+    .question { margin: 24px 0 8px; font-size: clamp(1.35rem, 5vw, 1.9rem); line-height: 1.25; }
+    .buttons {
+      position: relative; display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+      gap: 12px; margin: 22px auto 0; min-height: 58px; max-width: 390px;
+    }
+    .btn { min-height: 48px; padding: 13px 20px; border: 0; border-radius: 999px; cursor: pointer; font-weight: 800; transition: transform .16s ease, box-shadow .16s ease, background .16s ease; -webkit-tap-highlight-color: transparent; }
+    .btn:focus-visible { outline: 3px solid #8e2d5b; outline-offset: 3px; }
+    .btn:active { transform: scale(.97); }
+    .yes { color: white; background: linear-gradient(135deg, #ff76b4, #e83e91); box-shadow: 0 8px 0 #bd2e73, 0 12px 24px #ec489933; }
+    .yes:hover { transform: translateY(-2px); }
+    .no { color: #a33c70; background: #ffe5f0; border: 1px solid #ffc0da; font-size: .82rem; padding: 9px 13px; min-height: 38px; }
+    .small-note { min-height: 28px; margin: 18px 0 0; color: #a36a86; font-size: .86rem; line-height: 1.5; }
+    footer { padding: 22px 8px 0; color: #a36a86; text-align: center; font-size: .8rem; }
+    .hidden { display: none !important; }
+    .result { margin-top: 22px; padding: 23px 18px; border-radius: 22px; background: linear-gradient(135deg, #fff0f7, #ffe0ed); border: 1px solid #ffc0da; animation: appear .5s ease both; }
+    .result h2 { margin: 0 0 10px; color: #c52e7a; font-size: clamp(1.6rem, 6vw, 2.25rem); }
+    .result p { line-height: 1.7; }
+    @keyframes appear { from{opacity:0;transform:translateY(12px) scale(.98)} to{opacity:1;transform:translateY(0) scale(1)} }
+    .confetti { position: fixed; z-index: 10; top: -20px; pointer-events: none; animation: confettiFall 2.6s ease-in forwards; }
+    @keyframes confettiFall { to { transform: translateY(110vh) rotate(700deg); opacity: 0; } }
+    @media (max-width: 390px) { .buttons { gap: 18px 10px; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="top-label">💌 documento extremamente sério</div>
+    <section class="card">
+      <div class="pixel-heart" aria-hidden="true">💗</div>
+      <h1>lice, tenho uma <span>pergunta</span>...</h1>
+      <p class="subtitle">
+        antis de tudo alice, qro dizer q eu fiz isso aqui pq mesmo a gente nao se conhecendo a tanto tempo assim
+	eu gosto muito de voce e eu acho q a gente poderia dar certo se tentasse
+        e por que eu nao consigo esconder qnd eu gosto de alguem >:c
+      </p>
+      <div class="divider"></div>
+      <div class="notice">
+        <strong>OLHA:</strong> eu sei q talvez possa ser um pouco complicado
+        por conta da distancia e tal, MAS olha
+      </div>
+      <div class="mini-section">
+        <h2>📋 essas sao as coisas q eu posso te oferecer</h2>
+        <p>
+          ☑ assistir aot com vc.<br>
+          ☑ fazer muitas pontes pra vc no mine.<br>
+          ☑ te amar muito.<br>
+          ☑ encher seu saco e te irritar.<br>
+          ☑ te amar bastante.<br>
+	  ☑ te dar muito carinho.<br>
+	  ☑ fazer varios doces pra vc.<br>
+        </p>
+      </div>
+      <div class="badges">
+        <span class="badge">⚔️ </span>
+        <span class="badge">⛏️ </span>
+        <span class="badge">🍥 </span>
+        <span class="badge">🦨 </span>
+      </div>
+      <h2 class="question">alice, quer namorar comigo? 🥹💗</h2>
+      <p class="subtitle">alternativas: SIM ou SIM. (q cara engraçado.)</p>
+      <div class="buttons" id="buttons">
+        <button class="btn yes" id="yesButton">SIMMMMM 💗</button>
+        <button class="btn no" id="noButton" aria-label="Não (botão brincalhão)">não 🙃</button>
+      </div>
+      <p class="small-note" id="smallNote" aria-live="polite">escolha com carinho ta pufavo.</p>
+      <section class="result hidden" id="result" aria-live="polite">
+        <div class="pixel-heart" aria-hidden="true">💖</div>
+        <h2>EU GOSTO MUITO DE VOCE BOCÓ</h2>
+        <p>
+          alice, falando sério agora, eu quero muito poder ser mais proximo de voce
+          te encontrar pessoalmente qnd vc for pra ribeirão, eu gosto muito de poder passar meu tempo com vc
+          voce alegra muito meus dias, sou grato por cada segundo jogando com vc ou conversando,
+	  amo ouvir sua risada,
+	  quero poder fazer parte da sua vida, quero poder fazer vc sorrir quero poder te dar carinho e continuar enchendo
+	  seu saco, quero zerar mine com voce e assistir muito anime ruim, vc é muito importante pra mim alice
+	  de verdade mesmo, sua linda
+        </p>
+        <p><strong>obrigado por me tirar tantas risadas e melhorar meus dias, minha bobona favorita 💗</strong></p>
+        <p>— agora a gente PRECISA zerar minecraft. 🫶</p>
+      </section>
+    </section>
+    <footer>feito com carinho medo e um pouquinho de vergonha  💗</footer>
+  </main>
+  <script>
+    /*
+      PERSONALIZAÇÃO FÁCIL:
+      Você pode trocar os textos entre aspas abaixo sem precisar entender o resto do código.
+    */
+    const nomeDela = "alice";
+    const apelidoCarinhoso = "minha fedida favorita";
+
+    const yesButton = document.getElementById("yesButton");
+    const noButton = document.getElementById("noButton");
+    const buttonsArea = document.getElementById("buttons");
+    const result = document.getElementById("result");
+    const smallNote = document.getElementById("smallNote");
+    let tentativasDeFuga = 0;
+
+    // Mantém a brincadeira divertida; depois de algumas tentativas, o botão para de fugir.
+    function fugirDoClique() {
+      if (tentativasDeFuga >= 5) {
+        smallNote.textContent = "KKKKKKKKKK TA BOM, eu desisto, mas escolhe com carinho pufavo 💗";
+        noButton.style.position = "static";
+        noButton.style.transform = "none";
+        return;
+      }
+
+      tentativasDeFuga++;
+      const area = buttonsArea.getBoundingClientRect();
+      const btn = noButton.getBoundingClientRect();
+      const maxX = Math.max(0, area.width - btn.width);
+      const maxY = 68;
+      noButton.style.position = "absolute";
+      noButton.style.left = Math.round(Math.random() * maxX) + "px";
+      noButton.style.top = Math.round(Math.random() * maxY) + "px";
+      smallNote.textContent = [
+        "EITA o botao ta com medo de tu 🏃‍♂️",
+        "ELE TÁ FUGINDO ALICE 😭",
+        "PEGA ELE ALICE MANO.",
+        "ate o botao ta ligado q nois combina KKKKKKKK",
+        "KKKKKKKKKKK VOU DEIXAR VC ESCOLHER AGORA 💗"
+      ][tentativasDeFuga - 1];
+    }
+
+    // No celular, tocar no "não" também ativa a fuga.
+    noButton.addEventListener("click", fugirDoClique);
+    noButton.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse") fugirDoClique();
+    });
+
+    yesButton.addEventListener("click", () => {
+      result.classList.remove("hidden");
+      smallNote.textContent = "AAAAEEEEEEEEEEEEEEEE 😭 (agora deixa eu respirar)";
+      result.scrollIntoView({ behavior: "smooth", block: "center" });
+      makeHearts();
+    });
+
+    function makeHearts() {
+      const symbols = ["💗", "💖", "💕", "💘", "✨"];
+      for (let i = 0; i < 34; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti";
+        piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.fontSize = (16 + Math.random() * 20) + "px";
+        piece.style.animationDelay = (Math.random() * 0.7) + "s";
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 3400);
+      }
+    }
+
+    const backgroundHearts = ["♡", "♥", "✧", "♡", "💕"];
+    for (let i = 0; i < 12; i++) {
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+      heart.textContent = backgroundHearts[i % backgroundHearts.length];
+      heart.style.left = (Math.random() * 96) + "vw";
+      heart.style.fontSize = (16 + Math.random() * 25) + "px";
+      heart.style.animationDuration = (9 + Math.random() * 13) + "s";
+      heart.style.animationDelay = (-Math.random() * 18) + "s";
+      document.body.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
